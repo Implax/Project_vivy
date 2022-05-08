@@ -7,11 +7,15 @@ from flask import Flask, render_template, url_for, request
 app = Flask(__name__)
 @app.route('/')
 
+    
 def main():
+    render_template("index.html")
+
     listener = sr.Recognizer() #Recognizer Class helps to recognize speech
     engine = pyttsx3.init()
 
     #Get All Voices Available With Package
+
     voices = engine.getProperty('voices')
     engine.setProperty('voice', voices[1].id)
 
@@ -22,6 +26,7 @@ def main():
     def take_command():
         try:
             with sr.Microphone() as source:
+
                 print('listening...')
                 voice = listener.listen(source) #Speech Recognizer is listening to source    
                 #Utilizes Google API to recognize Voice Activity from user
@@ -63,4 +68,4 @@ def main():
     
 
 if __name__ == "__main__":
-    app.run(host="http://localhost/Ash/Ashesi-E-Academic-Advisor/dash1/ASH.php", port=8080, debug=True)
+    app.run(host="127.0.0.1", port=8080, debug=True)
